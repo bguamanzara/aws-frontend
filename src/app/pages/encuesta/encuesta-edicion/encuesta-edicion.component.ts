@@ -3,6 +3,7 @@ import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms'
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { EncuestaService } from 'src/app/_services/encuesta.service.';
 import { Encuesta } from 'src/app/_model/Encuesta';
+import { SecurityService } from 'src/app/_services/security.service';
 
 @Component({
   selector: 'app-encuesta-edicion',
@@ -16,15 +17,19 @@ export class EncuestaEdicionComponent implements OnInit {
   form: FormGroup;
   encuesta: Encuesta;
   titleTolbar: string;
-  
+  favoriteSeason: string;
+  seasons: string[] = ['Java', 'C#'];
+
   constructor(
     private builder: FormBuilder,
     private router: Router,
     private encuestaService: EncuestaService,
+    public securityService: SecurityService,
     public route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.securityService.esRoleAdmin()
     this.form = this.builder.group({
       'id': new FormControl(),
       'nombres': new FormControl(''),
@@ -88,7 +93,11 @@ export class EncuestaEdicionComponent implements OnInit {
         });
       });
     }
-    this.router.navigate(['/encuesta']);
+    if(this.securityService.esRoleAdmin()){
+      this.router.navigate(['/encuesta']);
+    }else{
+      this.initEncuestaForm();
+    }
   }
 
 }

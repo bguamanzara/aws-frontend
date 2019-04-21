@@ -30,7 +30,11 @@ export class SecurityComponent implements OnInit {
         sessionStorage.setItem(TOKEN_NAME, token);
         this.serviceSecurity.validarToken().subscribe((data:any) => {
           sessionStorage.setItem(PARAM_USUARIO, JSON.stringify(data.body));
-          this.router.navigate(['/encuesta']);
+          if(this.serviceSecurity.esRoleAdmin()){
+            this.router.navigate(['/encuesta']);
+          }else{
+            this.router.navigate(['/encuesta/crear']);
+          }
         });
     });
   }

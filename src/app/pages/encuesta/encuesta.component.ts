@@ -3,6 +3,7 @@ import { MatTableDataSource, MatPaginator, MatDialog, MatSnackBar } from '@angul
 import { Encuesta } from 'src/app/_model/Encuesta';
 import { EncuestaService } from 'src/app/_services/encuesta.service.';
 import { SecurityService } from 'src/app/_services/security.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-encuesta',
@@ -19,12 +20,20 @@ export class EncuestaComponent implements OnInit {
 
   constructor(
     public securityService: SecurityService,
+    public route: ActivatedRoute, 
+    private router: Router,
     private serviceProblema: EncuestaService,
     private snackBar: MatSnackBar) {
     this.dataSource = new MatTableDataSource<Encuesta>();
   }
 
   ngOnInit() {
+    if(this.securityService.esRoleAdmin()){
+      this.router.navigate(['/encuesta']);
+    }else{
+      this.router.navigate(['/encuesta/crear']);
+    }
+
     this.cargarTabla(0, 100, false);
     this.serviceProblema.mensajeCambio.subscribe((dato) => {
       this.snackBar.open(dato, null, {

@@ -30,16 +30,16 @@
       <img src="assets/mitocode.jpg" width="200">
       <mat-divider></mat-divider>
 
-      <button mat-menu-item (click)="sidenav.toggle()" routerLink="/mapa" style="cursor: pointer">
-        <mat-icon>location_on</mat-icon>
-        <span>Buscar</span>
+      <button mat-menu-item (click)="sidenav.toggle()" routerLink="/encuesta/crear" style="cursor: pointer">
+        <mat-icon>description</mat-icon>
+        <span>Encuesta</span>
       </button>
-      <mat-divider></mat-divider>
+      <!-- <mat-divider></mat-divider>
 
       <button mat-menu-item (click)="sidenav.toggle()" routerLink="/problema" style="cursor: pointer">
         <mat-icon>add_alert</mat-icon>
         <span>FeedBack</span>
-      </button>
+      </button> -->
 
       <mat-accordion *ngIf="isAdmin">
         <mat-expansion-panel>
@@ -49,16 +49,8 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
 
-          <button mat-menu-item (click)="sidenav.toggle()" routerLink="/admin/tiponegocio" style="cursor: pointer">
-            <span>Tipo Negocio</span>
-          </button>
-          <mat-divider></mat-divider>
-          <button mat-menu-item (click)="sidenav.toggle()" routerLink="/admin/negocio" style="cursor: pointer">
-            <span>Negocio</span>
-          </button>
-          <mat-divider></mat-divider>
-          <button mat-menu-item (click)="sidenav.toggle()" routerLink="/admin/sedes" style="cursor: pointer">
-            <span>Sedes</span>
+          <button mat-menu-item (click)="sidenav.toggle()" routerLink="/encuesta" style="cursor: pointer">
+            <span>Encuestas</span>
           </button>
 
         </mat-expansion-panel>

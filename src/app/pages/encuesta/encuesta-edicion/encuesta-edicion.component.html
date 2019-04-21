@@ -15,9 +15,18 @@
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Edad" formControlName="edad" required>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
+      <!-- <mat-form-field class="example-full-width">
         <input matInput placeholder="Lenguaje" formControlName="lenguaje" required>
-      </mat-form-field>
+      </mat-form-field> -->
+
+      <label id="example-radio-group-label">Lenguaje</label>
+      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+      formControlName="lenguaje" >
+        <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+          {{season}}
+        </mat-radio-button>
+      </mat-radio-group>
+
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Profesion" formControlName="profesion" required>
       </mat-form-field>
@@ -26,7 +35,7 @@
         <mat-icon>done</mat-icon>
         <span>Aceptar</span>
       </button>
-      <button mat-raised-button color="accent" routerLink='/encuesta' type="button">
+      <button mat-raised-button color="accent" routerLink='/encuesta' type="button" *ngIf="securityService.esRoleAdmin()">
         <mat-icon>close</mat-icon>
         <span>Cancelar</span>
       </button>
