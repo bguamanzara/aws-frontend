@@ -35,7 +35,7 @@ export class SecurityService {
     let rpta = false;
     if(usuario.authorities !== null) {
       usuario.authorities.forEach(element => {
-        if(element.authority == "ROLE_ADMIN"){   
+        if(element.authority == "ROLE_ADMINISTRATOR"){   
           rpta = true;
         }
       });

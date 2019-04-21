@@ -26,7 +26,7 @@
     "@auth0/angular-jwt": "^2.0.0",
     "@types/googlemaps": "^3.30.11",
     "core-js": "^2.5.4",
-    "rxjs": "^6.2.2",
+    "rxjs": "~6.2.2",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

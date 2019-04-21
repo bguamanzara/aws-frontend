@@ -23,6 +23,7 @@ import { NuevonegocioComponent } from './pages/admin/negocio/nuevonegocio/nuevon
 import { NuevasedeComponent } from './pages/admin/sedes/nuevasede/nuevasede.component';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { EncuestaComponent } from './pages/encuesta/encuesta.component';
+import { EncuestaEdicionComponent } from './pages/encuesta/encuesta-edicion/encuesta-edicion.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { EncuestaComponent } from './pages/encuesta/encuesta.component';
     NuevoTipoNegocioComponent,
     NuevonegocioComponent,
     NuevasedeComponent,
-    EncuestaComponent
+    EncuestaComponent,
+    EncuestaEdicionComponent
   ],
   imports: [
     BrowserModule,

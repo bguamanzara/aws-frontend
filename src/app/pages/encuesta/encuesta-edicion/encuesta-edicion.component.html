@@ -1,0 +1,36 @@
+<mat-toolbar>
+  <div class="text-center-toolbar">
+    {{ titleTolbar }}
+  </div>
+</mat-toolbar>
+<mat-card>
+  <form [formGroup]="form" (ngSubmit)="saveEncuesta()" #encuestasForm="ngForm">
+    <div class="example-container">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Nombres" formControlName="nombres" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Apellidos" formControlName="apellidos" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Edad" formControlName="edad" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Lenguaje" formControlName="lenguaje" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Profesion" formControlName="profesion" required>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="encuestasForm.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Aceptar</span>
+      </button>
+      <button mat-raised-button color="accent" routerLink='/encuesta' type="button">
+        <mat-icon>close</mat-icon>
+        <span>Cancelar</span>
+      </button>
+    </div>
+
+  </form>
+</mat-card>

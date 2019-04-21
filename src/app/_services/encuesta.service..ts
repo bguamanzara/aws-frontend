@@ -11,23 +11,32 @@ export class EncuestaService {
 
   urlEncuesta: string = `${HOST_BACKEND}/api/encuestas`;
 
-  mensajeRegistro = new Subject<string>();
+  mensajeCambio = new Subject<string>();
+  encuestaChange = new Subject<Encuesta[]>();
 
   constructor(private httpClient: HttpClient) { }
 
-  obtenerCatalogoProblemas() {
+  obtenerCatalogoEncuestas() {
     return this.httpClient.get<Encuesta[]>(`${this.urlEncuesta}`);
   }
 
-  obtenerFeedBacksPropios(page: number, size: number) {
+  obtenerEncuestasPropios(page: number, size: number) {
     return this.httpClient.get<Encuesta[]>(`${this.urlEncuesta}?page=${page}&size=${size}`);
   }
 
-  guardarFeedBack(encuesta: Encuesta) {
+  guardarEncuesta(encuesta: Encuesta) {
     return this.httpClient.post(`${this.urlEncuesta}`, encuesta);
   }
 
-  eliminarFeedBack(id: number) {
+  eliminarEncuesta(id: number) {
     return this.httpClient.delete(`${this.urlEncuesta}/${id}`);
+  }
+
+  obtenerEncuesta(id: number) {
+    return this.httpClient.get<Encuesta>(`${this.urlEncuesta}/${id}`);
+  }
+
+  modificar(encuesta: Encuesta) {
+    return this.httpClient.put(`${this.urlEncuesta}`, encuesta);
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatDialog, MatSnackBar } from '@angular/material';
 import { Encuesta } from 'src/app/_model/Encuesta';
 import { EncuestaService } from 'src/app/_services/encuesta.service.';
+import { SecurityService } from 'src/app/_services/security.service';
 
 @Component({
   selector: 'app-encuesta',
@@ -14,9 +15,10 @@ export class EncuestaComponent implements OnInit {
   totalElementos: number = 0;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns: string[] = ['id', 'nombres', 'apellidos', 'edad', 'lenguaje'];
+  displayedColumns: string[] = ['id', 'nombres', 'apellidos', 'edad', 'lenguaje', 'actions'];
 
   constructor(
+    public securityService: SecurityService,
     private serviceProblema: EncuestaService,
     private snackBar: MatSnackBar) {
     this.dataSource = new MatTableDataSource<Encuesta>();
@@ -24,7 +26,7 @@ export class EncuestaComponent implements OnInit {
 
   ngOnInit() {
     this.cargarTabla(0, 100, false);
-    this.serviceProblema.mensajeRegistro.subscribe((dato) => {
+    this.serviceProblema.mensajeCambio.subscribe((dato) => {
       this.snackBar.open(dato, null, {
         duration: 1500,
       });
@@ -41,7 +43,7 @@ export class EncuestaComponent implements OnInit {
   }
 
   cargarTabla(pageIndex: number, pageSize: number, desdePaginador: boolean){
-    this.serviceProblema.obtenerFeedBacksPropios(pageIndex, pageSize).subscribe((datos) => {
+    this.serviceProblema.obtenerEncuestasPropios(pageIndex, pageSize).subscribe((datos) => {
       let feedbacks = JSON.parse(JSON.stringify(datos)).content;
       this.dataSource = new MatTableDataSource<Encuesta>(feedbacks);
       this.totalElementos = JSON.parse(JSON.stringify(datos)).totalElements;
@@ -51,9 +53,9 @@ export class EncuestaComponent implements OnInit {
     });
   }
 
-  eliminarFeedBack(id: number) {
-    this.serviceProblema.eliminarFeedBack(id).subscribe((data) => {
-      this.serviceProblema.mensajeRegistro.next('Dato eliminado correctamente...');
+  eliminarEncuesta(id: number) {
+    this.serviceProblema.eliminarEncuesta(id).subscribe((data) => {
+      this.serviceProblema.mensajeCambio.next('Dato eliminado correctamente...');
     });
   }
 
